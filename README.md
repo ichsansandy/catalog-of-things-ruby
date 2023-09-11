@@ -10,29 +10,26 @@
 
 ## 📗 Table of Contents
 
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Tech Stack](#tech-stack)
-    - [Key Features](#key-features)
-    <!-- - [🚀 Live Demo](#live-demo) -->
-- [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  <!-- - [Usage](#usage) -->
-- [👥 Author](#author)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [📝 License](#license)
+- [📖 Catalog of My Things ](#-catalog-of-my-things-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+  - [👥 Author ](#-author-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
 <!-- PROJECT DESCRIPTION -->
 
 # 📖 Catalog of My Things <a name="about-project"></a>
 
 **Catalog of My Things** is an app to manage your things
-
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -95,10 +92,6 @@ it will install the required gemfile for running the project
 
 <!-- ### Usage -->
 
-
-
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
@@ -111,6 +104,16 @@ it will install the required gemfile for running the project
 - Twitter: [@1chsansandy](https://twitter.com/1chsansandy)
 - LinkedIn: [Ichsan Sandy](https://linkedin.com/in/ichsans)
 
+👤 **MoFuhidy**
+
+- GitHub: [@mofuhidy](https://github.com/Mofuhidy)
+- LinkedIn: [mofuhidy](https://linkedin.com/in/mo-fuhidy)
+
+👤 **Ghulam Shabbir**
+
+- GitHub: [@AJ](https://github.com/AJ193)
+- Twitter: [@AJ](https://twitter.com/GhulamShabbir59)
+- LinkedIn: [@AJ](https://www.linkedin.com/in/ghulam-shabbir-225264247)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
