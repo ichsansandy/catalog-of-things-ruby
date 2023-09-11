@@ -16,18 +16,18 @@ module BooksManager
     File.write(file, JSON.generate(data))
   end
 
-  def get_books
-     file = './Data/books.json'
+  def fetch_books
+    file = './Data/books.json'
     data = []
 
     return data unless File.exist?(file) && !File.empty?(file)
 
     JSON.parse(File.read(file)).each do |book|
       new_book = Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id'],
-                      archived: book['archived'])
+                          archived: book['archived'])
 
       new_book.genre = book['genre']
-      new_book.label = book['label']
+      new_book.label = Label.new(book['label'], book['color'])
       new_book.author = book['author']
 
       data << new_book

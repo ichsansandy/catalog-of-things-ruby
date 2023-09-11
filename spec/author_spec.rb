@@ -27,8 +27,10 @@ RSpec.describe Author do
 
     it 'have the add_item method that function correctly' do
       item = Item.new('2022-09-06')
+
       @author.add_item(item)
       result = @author.items
+
       expect(result.length).to eql(1)
     end
 
