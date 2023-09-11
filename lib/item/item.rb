@@ -14,5 +14,14 @@ class Item
   def move_to_archive
     @archived = true if can_be_archived?
   end
+  def genre = (genre)
+    @genre = genre
+  end
+  def label = (label)
+    @label = label
+  end
+  def author = (author)
+    @author = author
+  end
 
 end
