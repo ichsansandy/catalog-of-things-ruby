@@ -58,17 +58,17 @@ class Main
   end
 
   def add_book
-    print "Book\'s author: "
+    print "Book's author: "
     author = gets.chomp
-    print "Book\'s publish date: "
+    print "Book's publish date: "
     publish_date = gets.chomp
-    print "Book\'s publisher: "
+    print "Book's publisher: "
     publisher = gets.chomp
-    print "Book\'s cover state(good, bad): "
+    print "Book's cover state(good, bad): "
     cover_state = gets.chomp
-    print "Book\'s genre: "
+    print "Book's genre: "
     genre = gets.chomp
-    print "Book\'s label: "
+    print "Book's label: "
     label = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
     book.genre = genre
@@ -92,4 +92,3 @@ class Main
     end
   end
 end
-

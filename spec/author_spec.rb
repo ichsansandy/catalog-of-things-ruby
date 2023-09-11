@@ -26,7 +26,7 @@ RSpec.describe Author do
     end
 
     it 'have the add_item method that function correctly' do
-      item = Item.new("2022-09-06")
+      item = Item.new('2022-09-06')
       @Author.add_item(item)
       result = @Author.items
       expect(result.length).to eql(1)
@@ -34,7 +34,7 @@ RSpec.describe Author do
 
     it 'raised error if add wrong item type' do
       item = 's'
-      expect{ @Author.add_item(item) }.to raise_error(ArgumentError, "'item' must be an instance of 'Item'")
+      expect { @Author.add_item(item) }.to raise_error(ArgumentError, "'item' must be an instance of 'Item'")
     end
   end
 end

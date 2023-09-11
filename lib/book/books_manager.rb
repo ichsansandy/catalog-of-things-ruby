@@ -17,14 +17,14 @@ module BooksManager
   end
 
   def get_books
-     file = './Data/books.json'
+    file = './Data/books.json'
     data = []
 
     return data unless File.exist?(file) && !File.empty?(file)
 
     JSON.parse(File.read(file)).each do |book|
       new_book = Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id'],
-                      archived: book['archived'])
+                          archived: book['archived'])
 
       new_book.genre = book['genre']
       new_book.label = book['label']
