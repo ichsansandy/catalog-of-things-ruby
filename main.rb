@@ -1,10 +1,14 @@
 require_relative 'lib/book/book'
 require_relative 'lib/book/books_manager'
+require_relative 'lib/label/labels_manager'
+require_relative 'lib/label/label'
 
 class Main
   include BooksManager
+  include LabelsManager
   def initialize
-    @books = get_books
+    @books = fetch_books
+    @labels = fetch_labels
   end
 
   puts "Welcome to Catalog of Things! \n\n"
@@ -27,7 +31,6 @@ class Main
     loop do
       menu
       option = gets.chomp
-
       case option
       when '1'
         list_books
@@ -38,7 +41,7 @@ class Main
       when '4'
         puts '4'
       when '5'
-        puts '5'
+        list_labels
       when '6'
         puts '6'
       when '7'
@@ -50,33 +53,66 @@ class Main
       when '10'
         print 'Thank you for using this app!'
         store_books(@books)
+        store_labels(@labels)
         break
       end
-
       puts "\n"
     end
   end
 
   def add_book
-    print "Book's author: "
-    author = gets.chomp
-    print "Book's publish date: "
-    publish_date = gets.chomp
-    print "Book's publisher: "
-    publisher = gets.chomp
-    print "Book's cover state(good, bad): "
-    cover_state = gets.chomp
-    print "Book's genre: "
-    genre = gets.chomp
-    print "Book's label: "
-    label = gets.chomp
+    author = get_user_input("Book's author")
+    publish_date = get_user_input("Book's publish date")
+    publisher = get_user_input("Book's publisher")
+    cover_state = get_user_input("Book's cover state(good, bad) ")
+    genre = get_user_input("Book's genre")
+    title = get_user_input("Book's label")
+    color = get_user_input('Color')
+
+    label = create_label(title, color)
+    book = create_book(publish_date, publisher, cover_state, genre, label, author)
+
+    book.move_to_archive
+
+    @books << book
+    @labels << label
+
+    puts 'Label added successfully'
+    puts "Book by (#{author}) created successfully"
+  end
+
+  def get_user_input(prompt)
+    print "#{prompt}: "
+    gets.chomp
+  end
+
+  def create_label(title, color)
+    Label.new(title, color)
+  end
+
+  def create_book(publish_date, publisher, cover_state, genre, label, author)
     book = Book.new(publish_date, publisher, cover_state)
     book.genre = genre
     book.label = label
     book.author = author
-    book.move_to_archive
-    @books << book
-    puts "Book by (#{author}) created successfully"
+    book
+  end
+
+  def get_user_input(prompt)
+    print "#{prompt}: "
+    gets.chomp
+  end
+
+  def create_label(title, color)
+    Label.new(title, color)
+  end
+
+  def create_book(publish_date, publisher, cover_state, genre, label, author)
+    book = Book.new(publish_date, publisher, cover_state)
+    book.genre = genre
+    book.label = label
+    book.author = author
+    book
   end
 
   def list_books
@@ -91,4 +127,19 @@ class Main
       end
     end
   end
+
+  def list_labels
+    puts '-' * 30
+    if @labels.empty?
+      puts 'No labels yet!'
+    else
+      puts 'The list Labels: '
+      @labels.each_with_index do |label, _index|
+        puts "Title: #{label.title} - Color: #{label.color}"
+      end
+    end
+  end
 end
+
+main = Main.new
+main.start

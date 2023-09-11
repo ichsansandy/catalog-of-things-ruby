@@ -1,7 +1,8 @@
-require_relative 'item'
+require_relative '../item/item'
 
 class Label
-  attr_accessor :items, :title, :color, :id
+  attr_accessor :items
+  attr_reader :title, :color, :id
 
   def initialize(title, color, id = nil)
     @id = id || Random.rand(1..1000)

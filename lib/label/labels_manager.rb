@@ -1,6 +1,6 @@
 require 'json'
 
-module LabelManager
+module LabelsManager
   def store_labels(all_labels)
     return if all_labels.empty?
 
@@ -15,7 +15,7 @@ module LabelManager
     File.write(file, JSON.generate(data))
   end
 
-  def get_books
+  def fetch_labels
     file = './Data/labels.json'
     data = []
 
