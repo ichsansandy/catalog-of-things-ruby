@@ -30,7 +30,7 @@ class Main
 
       case option
       when '1'
-        puts '1'
+        list_books
       when '2'
         puts '2'
       when '3'
@@ -77,6 +77,19 @@ class Main
     book.move_to_archive
     @books << book
     puts "Book by (#{author}) created successfully"
+  end
+
+  def list_books
+    puts '-' * 30
+    if @books.empty?
+      puts 'No books yet!'
+    else
+      puts 'The list Books: '
+      @books.each_with_index do |book, index|
+        puts "#{index + 1}-[Book] ID: #{book.id} - Publisher: #{book.publisher} - " \
+             "Publish date: #{book.publish_date} - Cover state: #{book.cover_state} - Archived: #{book.archived}"
+      end
+    end
   end
 end
 

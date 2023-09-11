@@ -2,8 +2,10 @@ require 'json'
 
 module BooksManager
   def store_books(all_books)
-    file = './data/books.json'
-    File.new('books.json', 'w+') unless File.exist?(file)
+    return if all_books.empty?
+
+    file = './Data/books.json'
+    File.new('./Data/books.json', 'w+') unless File.exist?(file)
 
     data = []
 
@@ -15,19 +17,20 @@ module BooksManager
   end
 
   def get_books
-     file = './data/books.json'
+     file = './Data/books.json'
     data = []
 
     return data unless File.exist?(file) && !File.empty?(file)
 
     JSON.parse(File.read(file)).each do |book|
-      book = Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id'],
+      new_book = Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id'],
                       archived: book['archived'])
-      book.genre = book['genre']
-      book.label = book['label']
-      book.author = book['author']
 
-      data << book
+      new_book.genre = book['genre']
+      new_book.label = book['label']
+      new_book.author = book['author']
+
+      data << new_book
     end
     data
   end
