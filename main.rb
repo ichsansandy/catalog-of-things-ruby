@@ -2,8 +2,8 @@ require_relative 'lib/book/book'
 require_relative 'lib/book/books_manager'
 require_relative 'lib/label/labels_manager'
 require_relative 'lib/label/label'
-require_relative 'lib/music/music_album.rb'
-require_relative 'lib/music/music_list.rb'
+require_relative 'lib/music/music_album'
+require_relative 'lib/music/music_list'
 
 class Main
   include BooksManager
@@ -67,13 +67,13 @@ class Main
     author = get_user_input("Book's author")
     publish_date = get_user_input("Book's publish date")
     publisher = get_user_input("Book's publisher")
-    cover_state = get_user_input("Book's cover state(good, bad) ")
+    get_user_input("Book's cover state(good, bad) ")
     genre = get_user_input("Book's genre")
     title = get_user_input("Book's label")
     color = get_user_input('Color')
 
     label = create_label(title, color)
-    book = create_book(publish_date, publisher, cover_state, genre, label, author)
+    book = create_book(publish_date, publisher, genre, label, author)
 
     book.move_to_archive
 
@@ -93,8 +93,8 @@ class Main
     Label.new(title, color)
   end
 
-  def create_book(publish_date, publisher, cover_state, genre, label, author)
-    book = Book.new(publish_date, publisher, cover_state)
+  def create_book(publish_date, publisher, genre, label, author)
+    book = Book.new(publish_date, publisher)
     book.genre = genre
     book.label = label
     book.author = author
@@ -110,7 +110,7 @@ class Main
     Label.new(title, color)
   end
 
-  def create_book(publish_date, publisher, cover_state, genre, label, author)
+  def create_book(publish_date, publisher, genre, label, author)
     book = Book.new(publish_date, publisher, cover_state)
     book.genre = genre
     book.label = label
