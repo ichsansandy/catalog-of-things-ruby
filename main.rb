@@ -4,14 +4,23 @@ require_relative 'lib/label/labels_manager'
 require_relative 'lib/label/label'
 require_relative 'lib/music/music_album'
 require_relative 'lib/music/music_list'
+require_relative 'lib/game/game'
+require_relative 'lib/game/game_manager'
+require_relative 'lib/author/author'
+require_relative 'lib/author/author_manager'
 
 class Main
   include BooksManager
   include LabelsManager
+  include GameManager
+  include AuthorManager
+
   def initialize
     @music = MusicList.new
     @books = fetch_books
     @labels = fetch_labels
+    @authors = fetch_authors
+    @games = fetch_games(@authors)
   end
 
   puts "Welcome to Catalog of Things! \n\n"
@@ -34,33 +43,29 @@ class Main
     loop do
       menu
       option = gets.chomp
-      case option
-      when '1'
-        list_books
-      when '2'
-        @music.list_all_music_albums
-      when '3'
-        puts '3'
-      when '4'
-        @music.list_all_genre
-      when '5'
-        list_labels
-      when '6'
-        puts '6'
-      when '7'
-        add_book
-      when '8'
-        @music.add_music_album
-      when '9'
-        puts '9'
-      when '10'
-        print 'Thank you for using this app!'
-        store_books(@books)
-        store_labels(@labels)
-        break
-      end
-      puts "\n"
+      handle_option(option)
+      break if option == '10'
     end
+    puts 'Thank you for using this app!'
+    store_books(@books)
+    store_labels(@labels)
+  end
+
+  def handle_option(option)
+    option_actions = {
+      '1' => method(:list_books),
+      '2' => method(:list_all_music_albums),
+      '3' => method(:list_all_game),
+      '4' => method(:list_all_genre),
+      '5' => method(:list_labels),
+      '6' => method(:list_all_author),
+      '7' => method(:add_book),
+      '8' => method(:add_music_album),
+      '9' => method(:add_new_game)
+    }
+
+    action = option_actions[option]
+    action&.call
   end
 
   def add_book
@@ -84,11 +89,6 @@ class Main
     puts "Book by (#{author}) created successfully"
   end
 
-  def get_user_input(prompt)
-    print "#{prompt}: "
-    gets.chomp
-  end
-
   def create_label(title, color)
     Label.new(title, color)
   end
@@ -104,18 +104,6 @@ class Main
   def get_user_input(prompt)
     print "#{prompt}: "
     gets.chomp
-  end
-
-  def create_label(title, color)
-    Label.new(title, color)
-  end
-
-  def create_book(publish_date, publisher, genre, label, author)
-    book = Book.new(publish_date, publisher, cover_state)
-    book.genre = genre
-    book.label = label
-    book.author = author
-    book
   end
 
   def list_books
@@ -141,6 +129,25 @@ class Main
         puts "Title: #{label.title} - Color: #{label.color}"
       end
     end
+  end
+
+  def add_new_game
+    new_game = add_game
+    add_author?(new_game)
+    @games << new_game
+    store_games(@games)
+  end
+
+  def list_all_music_albums
+    @music.list_all_music_albums
+  end
+
+  def list_all_genre
+    @music.list_all_genre
+  end
+
+  def add_music_album
+    @music.add_music_album
   end
 end
 

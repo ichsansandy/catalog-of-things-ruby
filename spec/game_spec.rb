@@ -1,5 +1,5 @@
 require_relative '../lib/game/game'
-require_relative '../lib/item/author'
+require_relative '../lib/author/author'
 require 'date'
 
 RSpec.describe Game do
