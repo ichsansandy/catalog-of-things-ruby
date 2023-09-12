@@ -69,36 +69,36 @@ class Main
   end
 
   def add_book
-    author = get_user_input("Book's author")
+    author_first = get_user_input("Author's first name")
+    author_last = get_user_input("Author's last name")
+    author = Author.new(author_first, author_last)
     publish_date = get_user_input("Book's publish date")
     publisher = get_user_input("Book's publisher")
-    get_user_input("Book's cover state(good, bad) ")
-    genre = get_user_input("Book's genre")
+    cover_state = get_user_input("Book's cover state(good, bad) ")
+    genre = Genre.new(get_user_input("Book's genre"))
     title = get_user_input("Book's label")
     color = get_user_input('Color')
-
     label = create_label(title, color)
-    book = create_book(publish_date, publisher, genre, label, author)
-
+    book = create_book(publish_date, publisher, cover_state)
+    book.genre = genre
+    book.label = label
+    book.author = author
     book.move_to_archive
 
     @books << book
     @labels << label
+    @authors << author
 
     puts 'Label added successfully'
-    puts "Book by (#{author}) created successfully"
+    puts "Book by (#{author_first} #{author_last}) created successfully"
   end
 
   def create_label(title, color)
     Label.new(title, color)
   end
 
-  def create_book(publish_date, publisher, genre, label, author)
-    book = Book.new(publish_date, publisher)
-    book.genre = genre
-    book.label = label
-    book.author = author
-    book
+  def create_book(publish_date, publisher, cover_state)
+    Book.new(publish_date, publisher, cover_state)
   end
 
   def get_user_input(prompt)
