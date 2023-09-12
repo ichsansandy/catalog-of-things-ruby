@@ -31,7 +31,7 @@ class App
     when '2'
       @music.list_all_music_albums
     when '3'
-      puts "list all games"
+      list_all_game(@games)
     when '4'
       @music.list_all_genre
     when '5'
@@ -48,27 +48,10 @@ class App
     when '8'
       @music.add_music_album
     when '9'
-      @game.add_game
+      @games << add_game
+      store_games(@games)
     end
   end
 
-  def add_game
-     puts "Add a new game"
-     multiplayer_input = get_user_input("Is It Multiplayer ( true or false ):")
-     multiplayer = (multiplayer_input.downcase == 'true')
-     last_played_at = get_user_input("Last played at ( YYYY-MM-DD ):")
-     publish_date = get_user_input("Official release at ( YYYY-MM-DD ):")
-     new_game = Game.new(multiplayer, last_played_at, publish_date)
-     puts "Game created"
-     @games << new_game
-  end
-
-  def add_author_to_item(item)
-      puts "Tag author to #{item.class.name}"     
-  end
-
-  def get_user_input(prompt)
-    print "#{prompt}: "
-    gets.chomp
-  end
+  
 end

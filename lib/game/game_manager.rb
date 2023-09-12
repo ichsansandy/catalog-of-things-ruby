@@ -11,16 +11,13 @@ module GameManager
 
     all_games.each do |game|
       data << { id: game.id, publish_date: game.publish_date, archived: game.archived,
-                multiplayer: game.multiplayer, last_played_at: game.last_played_at.to_s , genre_id: game.genre.id, 
-                author_id: game.author.id, label_id: game.label.id }
+                multiplayer: game.multiplayer, last_played_at: game.last_played_at.to_s , genre_id: game.genre.nil? ? nil : game.genre.id, 
+                author_id: game.author.nil? ? nil : game.author.id, label_id: game.label.nil? ? nil : game.label.id }
     end
     File.write(file, JSON.generate(data))
   end
 
-  def fetch_games(all_author
-                  # all_label, 
-                  # all_genre.
-                 )
+  def fetch_games(all_author)
     file = './Data/games.json'
     data = []
 
@@ -30,7 +27,7 @@ module GameManager
       new_game = Game.new(game['multiplayer'], game['last_played_at'],
                           game['publish_date'], game['id'], archived: game['archived'])
 
-      new_game.author = all_author.find { |author| author.id == game["author_id"]  }
+      # new_game.author = all_author.find { |author| author.id == game["author_id"]  }
       # new_game.label = all_label.find { |label| label.id == game["label_id"]  }
       # new_game.genre = all_genre.find { |genre| genre.id == game["genre_id"]  }
 
@@ -38,4 +35,39 @@ module GameManager
     end
     data
   end
+
+  def add_game
+    puts "Add a new game"
+    multiplayer_input = get_user_input("Is It Multiplayer ( true or false ):")
+    multiplayer = (multiplayer_input.downcase == 'true')
+    last_played_at = get_user_input("Last played at ( YYYY-MM-DD ):")
+    publish_date = get_user_input("Official release at ( YYYY-MM-DD ):")
+    new_game = Game.new(multiplayer, last_played_at, publish_date)
+    puts "Game created"
+    new_game
+  end
+
+  def add_author_to_item(item)
+    puts "Tag author to #{item.class.name}"     
+  end
+
+  def get_user_input(prompt)
+    print "#{prompt} "
+    gets.chomp
+  end
+
+  def list_all_game(all_game) 
+      puts '-' * 50
+      if all_game.empty?
+        puts 'No games yet!'
+      else
+        puts 'The Game List: '
+        all_game.each_with_index do |game, index|
+          puts "#{index + 1}-[Game] ID: #{game.id} - Publish date: #{game.publish_date} - " \
+          "Last played date: #{game.last_played_at} - Multiplayer: #{game.multiplayer} - Archived: #{game.archived}"
+        end
+      end
+      puts '-' * 50
+  end
+
 end
