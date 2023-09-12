@@ -6,7 +6,7 @@ class Item
     @id = id || Random.rand(1..1000)
     @publish_date = Date.parse(publish_date)
     @archived = archived
-end
+  end
 
   def genre=(genre)
     @genre = genre
@@ -31,5 +31,5 @@ end
 
   def can_be_archived?
     (Date.today.year - @publish_date.year) > 10
-end
+  end
 end
