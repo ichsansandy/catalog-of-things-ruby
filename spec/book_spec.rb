@@ -13,19 +13,18 @@ describe Book do
   end
 
   it 'can be archived should return true' do
-    book = Book.new('2011-09-9', 'Adeeb', 'good')
+    book = Book.new('2011-09-09', 'Adeeb', 'good')
     expect(book.can_be_archived?).to be true
   end
 
   it 'can be archived should return false' do
-    book = Book.new('2023-09-9', 'Adeeb', 'good')
+    book = Book.new('2023-09-09', 'Adeeb', 'good')
     expect(book.can_be_archived?).to be false
   end
 
   it 'should store books in json files' do
     books = [Book.new('2023-09-09', 'Fuhidy', 'good'), Book.new('2023-07-09', 'Adeeb', 'bad')]
     store_books(books)
-    expect(File.exist?('./Data/books.json') && File.read('./Data/books.json') != '').to eq true
+    expect(File.exist?('./Data/books.json') && !File.empty?('./Data/books.json')).to eq true
   end
-
 end
