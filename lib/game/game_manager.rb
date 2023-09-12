@@ -11,13 +11,15 @@ module GameManager
 
     all_games.each do |game|
       data << { id: game.id, publish_date: game.publish_date, archived: game.archived,
-                multiplayer: game.multiplayer, last_played_at: game.last_played_at.to_s , genre_id: game.genre.nil? ? nil : game.genre.id, 
-                author_id: game.author.nil? ? nil : game.author.id, label_id: game.label.nil? ? nil : game.label.id }
+                multiplayer: game.multiplayer, last_played_at: game.last_played_at.to_s,
+                genre_id: game.genre.nil? ? nil : game.genre.id,
+                author_id: game.author.nil? ? nil : game.author.id,
+                label_id: game.label.nil? ? nil : game.label.id }
     end
     File.write(file, JSON.generate(data))
   end
 
-  def fetch_games(all_author)
+  def fetch_games(_all_author)
     file = './Data/games.json'
     data = []
 
@@ -37,33 +39,27 @@ module GameManager
   end
 
   def add_game
-    puts "Add a new game"
-    multiplayer_input = get_user_input("Is It Multiplayer ( true or false ):")
+    puts 'Add a new game'
+    multiplayer_input = get_user_input('Is It Multiplayer ( true or false ):')
     multiplayer = (multiplayer_input.downcase == 'true')
-    last_played_at = get_user_input("Last played at ( YYYY-MM-DD ):")
-    publish_date = get_user_input("Official release at ( YYYY-MM-DD ):")
+    last_played_at = get_user_input('Last played at ( YYYY-MM-DD ):')
+    publish_date = get_user_input('Official release at ( YYYY-MM-DD ):')
     new_game = Game.new(multiplayer, last_played_at, publish_date)
-    puts "Game created"
+    puts 'Game created'
     new_game
   end
 
-  def get_user_input(prompt)
-    print "#{prompt} "
-    gets.chomp
-  end
-
-  def list_all_game 
-      puts '-' * 50
-      if @games.empty?
-        puts 'No games yet!'
-      else
-        puts 'The Game List: '
-        @games.each_with_index do |game, index|
-          puts "#{index + 1} - [Game] ID: #{game.id} - Publish date: #{game.publish_date} - " \
-          "Last played date: #{game.last_played_at} - Multiplayer: #{game.multiplayer} - Archived: #{game.archived}"
-        end
+  def list_all_game
+    puts '-' * 50
+    if @games.empty?
+      puts 'No games yet!'
+    else
+      puts 'The Game List: '
+      @games.each_with_index do |game, index|
+        puts "#{index + 1} - [Game] ID: #{game.id} - Publish date: #{game.publish_date} - " \
+             "Last played date: #{game.last_played_at} - Multiplayer: #{game.multiplayer} - Archived: #{game.archived}"
       end
-      puts '-' * 50
+    end
+    puts '-' * 50
   end
-
 end
