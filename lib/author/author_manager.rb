@@ -15,7 +15,7 @@ module AuthorManager
     File.write(file, JSON.generate(data))
   end
 
-  def fetch_author
+  def fetch_authors
     file = './Data/authors.json'
     data = []
 

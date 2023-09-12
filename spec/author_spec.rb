@@ -1,4 +1,4 @@
-require_relative '../lib/item/author'
+require_relative '../lib/author/author'
 require_relative '../lib/item/item'
 require 'date'
 

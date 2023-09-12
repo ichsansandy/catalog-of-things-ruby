@@ -1,6 +1,6 @@
 require 'json'
 
-module GamesManager
+module GameManager
   def store_games(all_games)
     return if all_games.empty?
 
@@ -17,7 +17,10 @@ module GamesManager
     File.write(file, JSON.generate(data))
   end
 
-  def fetch_games(all_author, all_label, all_genre)
+  def fetch_games(all_author
+                  # all_label, 
+                  # all_genre.
+                 )
     file = './Data/games.json'
     data = []
 
@@ -28,8 +31,8 @@ module GamesManager
                           game['publish_date'], game['id'], archived: game['archived'])
 
       new_game.author = all_author.find { |author| author.id == game["author_id"]  }
-    #   new_game.label = all_label.find { |label| label.id == game["label_id"]  }
-    #   new_game.genre = all_genre.find { |genre| genre.id == game["genre_id"]  }
+      # new_game.label = all_label.find { |label| label.id == game["label_id"]  }
+      # new_game.genre = all_genre.find { |genre| genre.id == game["genre_id"]  }
 
       data << new_game
     end

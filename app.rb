@@ -1,15 +1,23 @@
 require_relative 'lib/music/music_album'
 require_relative 'lib/item/genre'
 require_relative 'lib/music/music_list'
-require_relative 'lib/list_book'
-require_relative 'lib/game'
-require_relative 'lib/game_save'
+
+require_relative 'lib/author/author'
+require_relative 'lib/author/author_manager'
+require_relative 'lib/game/game'
+require_relative 'lib/game/game_manager'
+
 
 class App
   def initialize
+    include GameManager
+    include AuthorManager
+
     @music = MusicList.new
     @list_book = ListBook.new
-    @game = GameList.new
+    @authors = fetch_author
+    @labels = fet
+    @games = fetch_games(@authors)
   end
 
   def select_option(option)
