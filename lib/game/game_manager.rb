@@ -47,23 +47,19 @@ module GameManager
     new_game
   end
 
-  def add_author_to_item(item)
-    puts "Tag author to #{item.class.name}"     
-  end
-
   def get_user_input(prompt)
     print "#{prompt} "
     gets.chomp
   end
 
-  def list_all_game(all_game) 
+  def list_all_game 
       puts '-' * 50
-      if all_game.empty?
+      if @games.empty?
         puts 'No games yet!'
       else
         puts 'The Game List: '
-        all_game.each_with_index do |game, index|
-          puts "#{index + 1}-[Game] ID: #{game.id} - Publish date: #{game.publish_date} - " \
+        @games.each_with_index do |game, index|
+          puts "#{index + 1} - [Game] ID: #{game.id} - Publish date: #{game.publish_date} - " \
           "Last played date: #{game.last_played_at} - Multiplayer: #{game.multiplayer} - Archived: #{game.archived}"
         end
       end

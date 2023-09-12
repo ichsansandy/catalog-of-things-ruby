@@ -18,7 +18,7 @@ class App
   include AuthorManager
   
   def initialize
-
+    
     @music = MusicList.new
     @authors = fetch_authors
     @games = fetch_games(@authors)
@@ -31,7 +31,7 @@ class App
     when '2'
       @music.list_all_music_albums
     when '3'
-      list_all_game(@games)
+      list_all_game
     when '4'
       @music.list_all_genre
     when '5'
@@ -48,7 +48,9 @@ class App
     when '8'
       @music.add_music_album
     when '9'
-      @games << add_game
+      new_game = add_game
+      add_author?(new_game)
+      @games << new_game
       store_games(@games)
     end
   end
