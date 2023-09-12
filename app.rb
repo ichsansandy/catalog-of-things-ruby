@@ -7,33 +7,37 @@ require_relative 'lib/author/author_manager'
 require_relative 'lib/game/game'
 require_relative 'lib/game/game_manager'
 
+require_relative 'lib/book/book'
+require_relative 'lib/book/books_manager'
+require_relative 'lib/label/label'
+require_relative 'lib/label/labels_manager'
+
 
 class App
+  include GameManager
+  include AuthorManager
+  
   def initialize
-    include GameManager
-    include AuthorManager
 
     @music = MusicList.new
-    @list_book = ListBook.new
-    @authors = fetch_author
-    @labels = fet
+    @authors = fetch_authors
     @games = fetch_games(@authors)
   end
 
   def select_option(option)
     case option
     when '1'
-      @list_book.list_all_books
+      puts "list all books"
     when '2'
       @music.list_all_music_albums
     when '3'
-      @game.list_all_games
+      puts "list all games"
     when '4'
       @music.list_all_genre
     when '5'
-      @list_book.list_all_labels
+      puts "list all labels"
     when '6'
-      @game.list_all_authors
+      puts "list all games"
     end
   end
 
@@ -46,5 +50,25 @@ class App
     when '9'
       @game.add_game
     end
+  end
+
+  def add_game
+     puts "Add a new game"
+     multiplayer_input = get_user_input("Is It Multiplayer ( true or false ):")
+     multiplayer = (multiplayer_input.downcase == 'true')
+     last_played_at = get_user_input("Last played at ( YYYY-MM-DD ):")
+     publish_date = get_user_input("Official release at ( YYYY-MM-DD ):")
+     new_game = Game.new(multiplayer, last_played_at, publish_date)
+     puts "Game created"
+     @games << new_game
+  end
+
+  def add_author_to_item(item)
+      puts "Tag author to #{item.class.name}"     
+  end
+
+  def get_user_input(prompt)
+    print "#{prompt}: "
+    gets.chomp
   end
 end
