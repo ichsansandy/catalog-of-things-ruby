@@ -28,7 +28,7 @@ module GameManager
     JSON.parse(File.read(file)).each do |game|
       new_game = Game.new(game['multiplayer'], game['last_played_at'],
                           game['publish_date'], game['id'], archived: game['archived'])
-      
+
       data << new_game
     end
     data
