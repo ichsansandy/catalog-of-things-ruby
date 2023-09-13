@@ -19,7 +19,7 @@ module GameManager
     File.write(file, JSON.generate(data))
   end
 
-  def fetch_games(_all_author)
+  def fetch_games
     file = './Data/games.json'
     data = []
 
@@ -28,11 +28,7 @@ module GameManager
     JSON.parse(File.read(file)).each do |game|
       new_game = Game.new(game['multiplayer'], game['last_played_at'],
                           game['publish_date'], game['id'], archived: game['archived'])
-
-      # new_game.author = all_author.find { |author| author.id == game["author_id"]  }
-      # new_game.label = all_label.find { |label| label.id == game["label_id"]  }
-      # new_game.genre = all_genre.find { |genre| genre.id == game["genre_id"]  }
-
+      
       data << new_game
     end
     data
@@ -40,10 +36,10 @@ module GameManager
 
   def add_game
     puts 'Add a new game'
-    multiplayer_input = get_user_input('Is It Multiplayer ( true or false ):')
+    multiplayer_input = get_user_input('Is It Multiplayer ( true or false )')
     multiplayer = (multiplayer_input.downcase == 'true')
-    last_played_at = get_user_input('Last played at ( YYYY-MM-DD ):')
-    publish_date = get_user_input('Official release at ( YYYY-MM-DD ):')
+    last_played_at = get_user_input('Last played at ( YYYY-MM-DD )')
+    publish_date = get_user_input('Official release at ( YYYY-MM-DD )')
     new_game = Game.new(multiplayer, last_played_at, publish_date)
     puts 'Game created'
     new_game

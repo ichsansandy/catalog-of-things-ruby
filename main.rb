@@ -20,7 +20,7 @@ class Main
     @books = fetch_books
     @labels = fetch_labels
     @authors = fetch_authors
-    @games = fetch_games(@authors)
+    @games = fetch_games
   end
 
   puts "Welcome to Catalog of Things! \n\n"
@@ -49,6 +49,8 @@ class Main
     puts 'Thank you for using this app!'
     store_books(@books)
     store_labels(@labels)
+    store_games(@games)
+    store_author(@authors)
   end
 
   def handle_option(option)
@@ -135,7 +137,6 @@ class Main
     new_game = add_game
     add_author?(new_game)
     @games << new_game
-    store_games(@games)
   end
 
   def list_all_music_albums
