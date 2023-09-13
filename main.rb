@@ -77,12 +77,11 @@ class Main
     publish_date = get_user_input("Book's publish date")
     publisher = get_user_input("Book's publisher")
     cover_state = get_user_input("Book's cover state(good, bad) ")
-    genre = Genre.new(get_user_input("Book's genre"))
     title = get_user_input("Book's label")
     color = get_user_input('Color')
     label = create_label(title, color)
     book = create_book(publish_date, publisher, cover_state)
-    book.genre = genre
+    add_genre?(book)
     book.label = label
     book.author = author
     book.move_to_archive
