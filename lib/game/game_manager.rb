@@ -12,9 +12,9 @@ module GameManager
     all_games.each do |game|
       data << { id: game.id, publish_date: game.publish_date, archived: game.archived,
                 multiplayer: game.multiplayer, last_played_at: game.last_played_at.to_s,
-                genre_id: game.genre.nil? ? nil : game.genre.id,
+                genre_name: game.genre.nil? ? nil : game.genre.name,
                 author_id: game.author.nil? ? nil : game.author.id,
-                label_id: game.label.nil? ? nil : game.label.id }
+                label_title: game.label.nil? ? nil : game.label }
     end
     File.write(file, JSON.generate(data))
   end
@@ -57,5 +57,39 @@ module GameManager
       end
     end
     puts '-' * 50
+  end
+
+  def add_genre?(item)
+    print "Want to tag #{item.class.name} to an Genre (yes/no) "
+    input = gets.chomp.downcase
+    add_genre_to_item(item) if input == 'yes'
+  end
+
+  def add_genre_to_item(item)
+    puts "Tag genre to #{item.class.name}"
+    print 'Create New genre (1) or Choose Existing (2) (Write 1 or 2) '
+    input = gets.chomp
+    if input == '1'
+      new_genre = create_new_genre
+      new_genre.add_item(item)
+      puts "Genre added to #{item.class.name} successfully"
+    elsif input == '2'
+      @music.list_all_genre
+      if @music.genres.length.positive?
+        print 'Select genre index (not id) '
+        index = gets.chomp.to_i - 1
+        selected_genre = @music.genres[index]
+        selected_genre.add_item(item)
+        puts "Genre added to #{item.class.name} successfully"
+      end
+    end
+  end
+
+  def create_new_genre
+    name = get_user_input('Write the genre you want to create')
+    new_genre = Genre.new(name)
+    @music.genres << new_genre
+    @music.save_genre
+    new_genre
   end
 end

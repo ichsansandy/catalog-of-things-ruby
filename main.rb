@@ -49,8 +49,8 @@ class Main
     puts 'Thank you for using this app!'
     store_books(@books)
     store_labels(@labels)
-    store_games(@games)
     store_author(@authors)
+    store_games(@games)
   end
 
   def handle_option(option)
@@ -136,6 +136,8 @@ class Main
   def add_new_game
     new_game = add_game
     add_author?(new_game)
+    add_genre?(new_game)
+    add_label?(new_game)
     @games << new_game
   end
 
