@@ -18,6 +18,8 @@
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Install](#install)
+    - [Usage](#usage)
+    - [Test](#test)
   - [👥 Author ](#-author-)
   - [🔭 Future Features ](#-future-features-)
   - [🤝 Contributing ](#-contributing-)
@@ -69,6 +71,7 @@ In order to run this project you need:
 ```
     ruby
     bundler
+    rspec
 ```
 
 ### Setup
@@ -89,6 +92,42 @@ Install this project with:
 ```
 
 it will install the required gemfile for running the project
+
+### Usage
+
+to use this project:
+
+```ruby
+  ruby main.rb
+```
+
+it will run the the CLI programm and show some prompt to choose by the user
+
+```
+  Welcome to Catalog of Things! 
+
+  Choose an option:
+  1. List all books
+  2. List all music albums
+  3. List of games
+  4. List all genres (e.g 'Comedy', 'Thriller')
+  5. List all labels (e.g 'Gift', 'New')
+  6. List all authors (e.g 'Stephen King', 'JK Rowling')
+  7. Add a books
+  8. Add a music albums
+  9. Add a games
+  10. Exit
+```
+### Test
+
+to run test in these this project:
+
+```ruby
+  rspec
+```
+
+it will run the all the unit test of these project
+
 
 <!-- ### Usage -->
 
