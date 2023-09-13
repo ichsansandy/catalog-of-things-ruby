@@ -26,9 +26,9 @@ module BooksManager
       new_book = Book.new(book['publish_date'], book['publisher'], book['cover_state'], book['id'],
                           archived: book['archived'])
 
-      # new_book.genre = book['genre']
+      new_book.genre = Genre.new(book['genre'])
       new_book.label = Label.new(book['label'], book['color'])
-      # new_book.author = book['author']
+      new_book.author = Author.new(book['author']['first_name'], book['author']['last_name'])
 
       data << new_book
     end

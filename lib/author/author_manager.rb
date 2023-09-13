@@ -30,14 +30,14 @@ module AuthorManager
   end
 
   def add_author?(item)
-    print "Want to tag #{item.class.name} to an Author (yes/no)"
+    print "Want to tag #{item.class.name} to an Author (yes/no) "
     input = gets.chomp.downcase
     add_author_to_item(item) if input == 'yes'
   end
 
   def add_author_to_item(item)
     puts "Tag author to #{item.class.name}"
-    print 'Create New Author (1) or Choose Existing (2) (Write 1 or 2)'
+    print 'Create New Author (1) or Choose Existing (2) (Write 1 or 2) '
     input = gets.chomp
     if input == '1'
       new_author = create_new_author
@@ -46,7 +46,7 @@ module AuthorManager
     elsif input == '2'
       list_all_author
       if @authors.length.positive?
-        print 'Select author index'
+        print 'Select author index (not id) '
         index = gets.chomp.to_i - 1
         selected_author = @authors[index]
         selected_author.add_item(item)
@@ -57,13 +57,12 @@ module AuthorManager
 
   def create_new_author
     puts 'Create New Author'
-    print 'First name:'
+    print 'First name: '
     first_name = gets.chomp
-    print 'Last name:'
+    print 'Last name: '
     last_name = gets.chomp
     new_author = Author.new(first_name, last_name)
     @authors << new_author
-    store_author(@authors)
     puts 'Author Created'
     new_author
   end
